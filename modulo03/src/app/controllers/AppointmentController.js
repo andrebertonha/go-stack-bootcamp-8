@@ -32,11 +32,11 @@ class AppointmentController {
               model: File,
               as: 'avatar',
               attributes: ['id', 'path', 'url']
-            }
-          ]
-        }
-      ]
-    })
+            },
+          ],
+        },
+      ],
+    });
 
     return res.json(appointments);
   }
@@ -57,9 +57,8 @@ class AppointmentController {
      * Check if provider id is a provider
      */
     const checkIsProvider = await User.findOne({
-      where: {
-        id: { [Op.ne]: provider_id },
-        provider: true
+      where: { id: provider_id, provider: true
+        //id: { [Op.ne]: provider_id },
       },
     });
 
