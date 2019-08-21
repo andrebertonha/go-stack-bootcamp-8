@@ -7,6 +7,8 @@ import User from '../models/User';
 import Notification from '../schemas/Notification';
 import { Op } from 'sequelize';
 
+import Mail from '../../lib/Mail';
+
 class AppointmentController {
 
   async index(req, res) {
@@ -114,7 +116,15 @@ class AppointmentController {
   }
 
   async delete(req, res) {
-    const appointment = await Appointment.findByPk(req.params.id);
+    const appointment = await Appointment.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          as: 'provider',
+          atributes: ['name', 'email']
+        },
+      ],
+    });
 
     if(appointment.user_id !== req.userId) {
       return res.status(401).json({
@@ -128,9 +138,14 @@ class AppointmentController {
     }
 
     appointment.canceled_at = new Date();
-    console.log(appointment.canceled_at);
 
-    await appointment.save(appointment);
+    await appointment.save();
+
+    await Mail.sendMail({
+      to: `${appointment.provider.name} <${appointment.provider.email}>`,
+      subject: 'Agendamento cancelado',
+      text: 'Você tem um novo cancelamento'
+    });
 
     return res.json(appointment);
   }
