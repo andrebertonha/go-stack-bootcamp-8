@@ -6,7 +6,7 @@ import User from '../models/User';
 
 class MeetupController {
   async index(req, res) {
-    const where = {}`;`;
+    const where = {};
     const page = req.query.page || 1;
 
     if (req.query.date) {
@@ -32,6 +32,7 @@ class MeetupController {
       file_id: Yup.number().required(),
       description: Yup.string().required(),
       location: Yup.string().required(),
+      date: Yup.date().required(),
     });
 
     if (!(await schema.isValid(req.body))) {
