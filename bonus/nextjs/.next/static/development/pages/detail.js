@@ -9769,7 +9769,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement;
 
 /***/ }),
 
-/***/ 3:
+/***/ 2:
 /*!****************************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fdetail&absolutePagePath=C%3A%5CUsers%5Cmaster%5CDocuments%5CgoStack_bootcamp%5Cbonus%5Cnextjs%5Cpages%5Cdetail.js ***!
   \****************************************************************************************************************************************************************/
@@ -9792,5 +9792,5 @@ module.exports = dll_129a35c7ec57967eb265;
 
 /***/ })
 
-},[[3,"static/runtime/webpack.js"]]]);
+},[[2,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=detail.js.map

@@ -17,6 +17,6 @@ export default () => Composed =>
     }
 
     render() {
-      return <Composed {... this.props} />
+      return <Composed {...this.props} />
     }
   };
