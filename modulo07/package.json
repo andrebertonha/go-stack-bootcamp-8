@@ -7,7 +7,6 @@
     "babel-preset-react-app": "^9.0.1",
     "global": "^4.4.0",
     "immer": "^3.2.0",
-    "lodash-template": "4.5.0",
     "polished": "^3.4.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
@@ -17,6 +16,7 @@
     "react-scripts": "3.1.1",
     "reactotron-react-js": "^3.3.2",
     "reactotron-redux": "^3.1.1",
+    "reactotron-redux-saga": "^4.2.2",
     "redux": "^4.0.4",
     "redux-saga": "^1.0.5",
     "styled-components": "^4.3.2"
