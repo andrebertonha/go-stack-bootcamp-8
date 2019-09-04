@@ -35,7 +35,7 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'no-param-reassign': 'off',
     'no-console': ["error", { allow: ["tron"] }],
-    'react-hooks/rule-of-hooks': 'error',
+    'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn'
   },
 };
