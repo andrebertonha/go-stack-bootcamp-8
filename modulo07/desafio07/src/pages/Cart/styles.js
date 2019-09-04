@@ -2,6 +2,10 @@ import styled from 'styled-components/native';
 
 import colors from '../../styles/colors';
 
+export const Wrapper = styled.View`
+  margin-top: 50px;
+`;
+
 export const Container = styled.View`
   padding: 10px;
   background: #fff;
@@ -46,6 +50,7 @@ export const ProductControls = styled.View`
   background: #eee;
   padding: 8px;
   border-radius: 4px;
+  margin-top: 60px;
 `;
 
 export const ProductControlButton = styled.TouchableOpacity``;

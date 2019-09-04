@@ -1,11 +1,13 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { Wrapper, Container, Logo, BasketContainer, ItemCount } from './styles';
 
-function Header({ navigation, cartSize }) {
+function Header({ navigation }) {
+  const cartSize = useSelector(state => state.cart.length);
+
   return (
     <Wrapper>
       <Container>
@@ -19,9 +21,4 @@ function Header({ navigation, cartSize }) {
   );
 }
 
-export default connect(
-  state => ({
-    cartSize: state.cart.length,
-  }),
-  null
-)(Header);
+export default Header;
