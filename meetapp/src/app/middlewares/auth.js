@@ -5,6 +5,7 @@ import { promisify } from 'util';
 import authConfig from '../../config/auth';
 
 export default async (req, res, next) => {
+  // get token
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {
