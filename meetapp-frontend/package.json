@@ -8,6 +8,7 @@
     "babel-plugin-root-import": "^6.4.1",
     "eslint-import-resolver-babel-plugin-root-import": "^1.1.1",
     "history": "^4.9.0",
+    "immer": "^3.2.1",
     "polished": "^3.4.1",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
