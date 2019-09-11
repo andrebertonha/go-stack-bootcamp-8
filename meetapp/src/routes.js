@@ -14,7 +14,7 @@ import OrganizingController from './app/controllers/OrganizingController';
 const routes = new Router();
 const upload = multer(multerConfig);
 
-routes.post('/users', UserController.store);
+routes.post('/user', UserController.store);
 routes.post('/sessions', SessionController.store);
 
 routes.use(authMiddleware);
