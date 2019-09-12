@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import api from '../../services/api';
-
 import { Container, Time } from './styles';
 
-// const range = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+const moment = require('moment');
 
 export default function Dashboard() {
   const token = useSelector(state => state.user.token);
@@ -17,6 +16,7 @@ export default function Dashboard() {
       const response = await api.get('meetups', {
         params: { token },
       });
+
       setMeetup(response.data);
     }
 
@@ -33,7 +33,7 @@ export default function Dashboard() {
         {meetup.map(meet => (
           <Time key={meet.id} past={meet.past} available={!meet.meetup}>
             <div>{meet.title}</div>
-            {meet.date}
+            {moment(meet.date).format('DD[ de ]MMMM[, às ]hh[h]')}
           </Time>
         ))}
       </ul>

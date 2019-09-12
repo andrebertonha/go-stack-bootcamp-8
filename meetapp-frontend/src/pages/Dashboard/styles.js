@@ -30,7 +30,8 @@ export const Container = styled.div`
   }
 
   ul {
-    display: grid;
+    display: column;
+    align-items: center;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 15px;
     margin-top: 30px;
@@ -38,6 +39,12 @@ export const Container = styled.div`
 `;
 
 export const Time = styled.li`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 660px;
+  height: 54px;
+  margin-top: 20px;
   padding: 20px;
   border-radius: 4px;
   background: #fff;
