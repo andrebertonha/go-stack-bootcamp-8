@@ -24,6 +24,12 @@ export const Container = styled.div`
       }
     }
 
+    input#attach {
+      width: 660px;
+      height: 220px;
+
+    }
+
     span {
       color: #f66f91;
       align-self: flex-start;
@@ -31,12 +37,35 @@ export const Container = styled.div`
       font-weight: bold;
     }
 
+    textarea {
+      background-color: rgba(0, 0, 0, 0.1);
+      height: 175px;
+      border: 0;
+      padding: 15px 15px;
+      color: #fff;
+      margin: 0 0 10px;
+      border-radius: 4px;
+      font-family: 'Roboto', sans-serif;
+      font-size: 14px;
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+      }
+    }
+
+    input#date {
+      font-size: 14px;
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+      }
+    }
+
     button {
       margin: 5px 0 0;
       width: 120px;
       height: 32px;
-      background: #d44059;
+      background: #f66f91;
       font-weight: normal;
+      font-size: 14px;
       color: #fff;
       border: 0;
       border-radius: 4px;
@@ -46,17 +75,6 @@ export const Container = styled.div`
 
       &:hover {
         background: ${darken(0.08, '#f66f91')};
-      }
-    }
-
-    a {
-      color: #fff;
-      margin-top: 15px;
-      font-size: 16px;
-      opacity: 0.8;
-
-      &:hover {
-        opacity: 1;
       }
     }
   }
