@@ -34,6 +34,7 @@ export default function DatePicker({ name, placeholder }) {
         ref={ref}
         timeIntervals={60}
         placeholderText={placeholder}
+        utcOffSet="-03:00"
         timeFormat="HH:mm"
         dateFormat="d MMMM, HH:mm"
       />
