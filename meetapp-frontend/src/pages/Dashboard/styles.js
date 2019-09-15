@@ -12,9 +12,11 @@ export const Container = styled.div`
     justify-content: space-between;
     align-items: center;
 
-    button {
+    button,
+    a {
       width: 120px;
       height: 30px;
+
       color: #fff;
       border: 0;
       border-radius: 4px;

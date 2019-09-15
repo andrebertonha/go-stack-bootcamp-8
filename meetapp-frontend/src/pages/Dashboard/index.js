@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
+import { Link } from 'react-router-dom';
+
 import api from '../../services/api';
 import { Container, Time } from './styles';
 
@@ -27,7 +29,7 @@ export default function Dashboard() {
     <Container>
       <header>
         <strong>Meus Meetups</strong>
-        <button type="button">Novo meetup</button>
+        <Link to="/meetup">Novo meetup</Link>
       </header>
       <ul>
         {meetup.map(meet => (

@@ -1,15 +1,28 @@
 import React from 'react';
-import { FileInput, Input, Form } from '@rocketseat/unform';
+import { useDispatch, useSelector } from 'react-redux';
+import { Input, Form } from '@rocketseat/unform';
+
+import { createMeetupRequest } from '../../store/modules/meetup/actions';
+
+import MeetupInput from './MeetupInput';
+import DatePicker from '../../components/DatePicker';
 import { Container } from './styles';
 
 export default function Meetup() {
+  const dispatch = useDispatch();
+  const meetup = useSelector(state => state.meetup.meetup);
+
+  function handleSubmit(data) {
+    dispatch(createMeetupRequest(data));
+  }
+
   return (
     <Container>
-      <Form>
-        <FileInput id="meetup" accept="image/*" name="attach" />
+      <Form initialData={meetup} onSubmit={handleSubmit}>
+        <MeetupInput name="file_id" />
         <Input name="title" placeholder="Título do Meetup" />
         <Input multiline name="description" placeholder="Descrição completa" />
-        <Input name="date" type="date" placeholder="Data do meetup" />
+        <DatePicker name="date" placeholder="Data do meetup" />
         <Input name="location" placeholder="Localização" />
         <button type="submit">Salvar meetup</button>
       </Form>
