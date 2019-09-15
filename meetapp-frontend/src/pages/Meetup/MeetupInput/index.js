@@ -1,9 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useField } from '@rocketseat/unform';
 import api from '../../../services/api';
 
 export default function MeetupInput() {
-  const { defaultValue } = useField('file');
+  const { defaultValue, registerField } = useField('avatar');
   const [file, setFile] = useState(defaultValue && defaultValue.id);
 
   const ref = useRef();
@@ -16,11 +16,21 @@ export default function MeetupInput() {
     setFile(id);
   }
 
+  useEffect(() => {
+    if (ref.current) {
+      registerField({
+        name: 'file_id',
+        ref: ref.current,
+        path: 'dataset.file',
+      });
+    }
+  }, [ref, registerField]);
+
   return (
     <label htmlFor="file_id">
       <input
         type="file"
-        id="file_id"
+        id="meetup"
         accept="image/*"
         data-file={file}
         onChange={handleChange}
