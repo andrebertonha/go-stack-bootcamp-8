@@ -24,7 +24,7 @@ export default function MeetupInput() {
         path: 'dataset.file',
       });
     }
-  }, [ref, registerField]);
+  }, [ref.current]); //eslint-disable-line
 
   return (
     <label htmlFor="file_id">
