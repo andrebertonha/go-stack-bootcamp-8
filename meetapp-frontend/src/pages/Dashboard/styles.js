@@ -16,7 +16,9 @@ export const Container = styled.div`
     a {
       width: 120px;
       height: 30px;
-
+      display: flex;
+      align-items: center;
+      justify-content: center;
       color: #fff;
       border: 0;
       border-radius: 4px;

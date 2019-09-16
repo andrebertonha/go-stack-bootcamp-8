@@ -27,7 +27,6 @@ export const Container = styled.div`
     input#attach {
       width: 660px;
       height: 220px;
-
     }
 
     span {

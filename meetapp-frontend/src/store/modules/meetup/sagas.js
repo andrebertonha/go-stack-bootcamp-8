@@ -21,8 +21,6 @@ export function* createMeetup({ payload }) {
     history.push('/dashboard');
   } catch (err) {
     toast.error('Erro ao criar meetup, confira os dados de meetup');
-    console.log(err);
-    console.tron.log(err);
     yield put(createMeetupFailure());
   }
 }
