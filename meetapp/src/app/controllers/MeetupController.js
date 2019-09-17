@@ -3,6 +3,7 @@ import { Op } from 'sequelize';
 import { isBefore, startOfDay, endOfDay, parseISO } from 'date-fns';
 import Meetup from '../models/Meetup';
 import User from '../models/User';
+import File from '../models/File';
 
 class MeetupController {
   async index(req, res) {
@@ -19,7 +20,18 @@ class MeetupController {
 
     const meetups = await Meetup.findAll({
       where,
-      include: [User],
+      include: [
+        {
+          model: User,
+          as: 'organizer',
+          atributes: ['id', 'name', 'email'],
+        },
+        {
+          model: File,
+          as: 'banner',
+          attributes: ['name', 'path', 'url'],
+        },
+      ],
       limit: 10,
       offset: 10 * page - 10,
     });
@@ -113,6 +125,12 @@ class MeetupController {
     await meetup.destroy();
 
     return res.send();
+  }
+
+  async details(req, res) {
+    const meetup = await Meetup.findByPk(req.params.id);
+    const { id, title, description, location, date, file_id } = meetup;
+    return res.json({ id, title, description, location, date, file_id });
   }
 }
 

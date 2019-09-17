@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { darken } from 'polished';
 
 export const Container = styled.div`
   max-width: 660px;
@@ -12,7 +13,6 @@ export const Container = styled.div`
     justify-content: space-between;
     align-items: center;
 
-    button,
     a {
       width: 120px;
       height: 30px;
@@ -39,6 +39,32 @@ export const Container = styled.div`
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 15px;
     margin-top: 30px;
+
+    button {
+      width: 40px;
+      height: 40px;
+      align-self: flex-end;
+      align-items: center;
+      justify-content: center;
+      background: #564464;
+      margin: 5px 0 0;
+      padding: 11px 25px;
+      border: 0;
+      border-radius: 4px;
+      transition: background 0.2s;
+      &:hover {
+        background: ${darken(0.08, '#564464')};
+      }
+      svg {
+        margin-right: 5px;
+      }
+      span {
+        color: #fff;
+        font-weight: bold;
+        font-size: 16px;
+        margin-bottom: 0;
+      }
+    }
   }
 `;
 

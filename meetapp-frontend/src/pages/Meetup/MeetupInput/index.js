@@ -10,8 +10,6 @@ export default function MeetupInput() {
   const { defaultValue, registerField } = useField('avatar');
   const [file, setFile] = useState(defaultValue && defaultValue.id);
   const [preview, setPreview] = useState(defaultValue && defaultValue.url);
-
-
   const ref = useRef();
 
   async function handleChange(e) {

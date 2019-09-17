@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Link } from 'react-router-dom';
-
+import { MdChevronRight } from 'react-icons/md';
 import api from '../../services/api';
 import { Container, Time } from './styles';
+
+import history from '../../services/history';
 
 const moment = require('moment');
 
@@ -18,12 +20,14 @@ export default function Dashboard() {
       const response = await api.get('meetups', {
         params: { token },
       });
-
       setMeetup(response.data);
     }
-
     loadMeetup();
   }, [token]);
+
+  function handleDetail(id) {
+    history.push(`/details/${id}`);
+  }
 
   return (
     <Container>
@@ -36,6 +40,11 @@ export default function Dashboard() {
           <Time key={meet.id} past={meet.past} available={!meet.meetup}>
             <div>{meet.title}</div>
             {moment(meet.date).format('DD[ de ]MMMM[, às ]hh[h]')}
+            <div>
+              <button type="button" onClick={() => handleDetail(meet.id)}>
+                <MdChevronRight size={24} color="#fff" />
+              </button>
+            </div>
           </Time>
         ))}
       </ul>

@@ -19,6 +19,14 @@ export default function meet(state = INITIAL_STATE, action) {
         draft.meetup = null;
         break;
       }
+      case '@meet/DETAIL_MEETUP_SUCCESS': {
+        draft.meetup = action.payload.data;
+        break;
+      }
+      case '@meet/DETAIL_MEETUP_FAILURE': {
+        draft.meetup = null;
+        break;
+      }
       default:
     }
   });
