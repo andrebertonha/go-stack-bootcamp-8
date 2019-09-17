@@ -15,11 +15,9 @@ import {
 } from './styles';
 
 import api from '../../services/api';
+import history from '../../services/history';
 
-import {
-  editMeetupRequest,
-  getMeetupRequest,
-} from '../../store/modules/meetup/actions';
+import { getMeetupRequest } from '../../store/modules/meetup/actions';
 
 export default function Details({ match }) {
   const dispatch = useDispatch();
@@ -50,7 +48,6 @@ export default function Details({ match }) {
     async function getMeetFile() {
       const response = await api.get(`/file/${meetup.file_id}`);
       const { idFile, url } = response.data;
-
       setPreview(url);
       setFile(idFile);
     }
@@ -58,7 +55,7 @@ export default function Details({ match }) {
   }, [id, meetup.file_id]);
 
   function handleEditMeet() {
-    dispatch(editMeetupRequest(meetup));
+    history.push('/meetup');
   }
 
   function handleCancelMeet() {}

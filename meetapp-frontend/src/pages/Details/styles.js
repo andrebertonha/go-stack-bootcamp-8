@@ -13,19 +13,6 @@ export const Container = styled.div`
     justify-content: space-between;
     align-items: center;
 
-    button,
-    a {
-      width: 120px;
-      height: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      border: 0;
-      border-radius: 4px;
-      background: #d44059;
-    }
-
     strong {
       font-family: 'Roboto', sans-serif;
       color: #fff;
@@ -83,12 +70,14 @@ export const ActionContainer = styled.div`
 
 export const EditButton = styled.button`
   background: #4dbaf9;
-  display: ${props => (props.canEdit ? 'flex' : 'none')};
+  display: flex;
   align-items: center;
+  justify-content: center;
   padding: 11px 15px;
   border: 0;
   border-radius: 4px;
   transition: background 0.2s;
+  height: 36px;
   &:hover {
     background: ${darken(0.05, '#4dbaf9')};
   }
@@ -97,18 +86,19 @@ export const EditButton = styled.button`
   }
   span {
     color: #fff;
-    font-weight: bold;
-    font-size: 16px;
+    font-weight: normal;
+    font-size: 14px;
     margin-bottom: 0;
   }
 `;
 
 export const CancelButton = styled.button`
   background: #d44059;
-  display: ${props => (props.canDelete ? 'flex' : 'none')};
+  display: flex;
   align-items: center;
   padding: 11px 15px;
   margin-left: 10px;
+  height: 36px;
   border: 0;
   border-radius: 4px;
   transition: background 0.2s;
@@ -120,8 +110,8 @@ export const CancelButton = styled.button`
   }
   span {
     color: #fff;
-    font-weight: bold;
-    font-size: 16px;
+    font-weight: normal;
+    font-size: 14px;
     margin-bottom: 0;
   }
 `;
