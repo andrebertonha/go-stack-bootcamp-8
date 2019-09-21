@@ -5,9 +5,9 @@ import logo from '~/assets/logo.png';
 
 import Background from '~/components/Background';
 
-import { Container, Form, FormInput, SubmitButton } from './styles';
+import { Container, Form, FormInput, SubmitButton, SignLink, SignLinkText } from './styles';
 
-export default function SignIn() {
+export default function SignIn({ navigation }) {
   return (
     <Background>
       <Container>
@@ -28,6 +28,10 @@ export default function SignIn() {
           <SubmitButton onPress={() => {}}>
             Entrar
           </SubmitButton>
+
+          <SignLink onPress={() => navigation.navigate('SignUp')}>
+            <SignLinkText>Criar conta</SignLinkText>
+          </SignLink>
         </Form>
       </Container>
     </Background>
