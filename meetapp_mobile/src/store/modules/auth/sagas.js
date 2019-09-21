@@ -14,9 +14,7 @@ export function* signIn({payload}) {
       password,
     });
 
-    const {token, user} = response.data;
-
-    // fazer verificacao se usuario é organizador de eventos
+    const {token, user} = response.data;    
 
     api.defaults.headers.Authorization = `Bearer ${token}`;
 
