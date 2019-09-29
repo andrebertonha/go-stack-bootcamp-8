@@ -7,7 +7,7 @@ import {Container, Description} from './styles';
 function MeetupDetail({icon, text}) {
   return (
     <Container>
-      <Icon name={icon} size={14} color="#999" />
+      <Icon name={icon} size={20} color="#999" />
       <Description>{text}</Description>
     </Container>
   );

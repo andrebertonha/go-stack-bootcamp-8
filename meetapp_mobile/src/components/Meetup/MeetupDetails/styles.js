@@ -10,7 +10,7 @@ export const Container = styled.View`
 export const Description = styled.Text.attrs({
   numberOfLines: 1,
 })`
-  font-size: 13px;
+  font-size: 18px;
   margin-left: 10px;
   color: #999;
 `;

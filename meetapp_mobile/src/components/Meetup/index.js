@@ -1,5 +1,8 @@
 import React from 'react';
 
+import {parseISO, format} from 'date-fns';
+import pt from 'date-fns/locale/pt';
+
 import MeetupDetails from './MeetupDetails';
 
 import {
@@ -12,20 +15,35 @@ import {
   InfoContainer,
 } from './styles';
 
-export default function Meetup() {
+export default function Meetup({data, onCancel}) {
+  const dateParsed = format(parseISO(data.date), "dd' de ' MMMM', às 'HH'h'", {
+    locale: pt,
+  });
+
   return (
-    <Container>
-      <Banner source={{uri: 'https://api.adorable.io/avatar/200/andre.png'}} />
+    <Container past={data.past}>
+      <Banner
+        source={{
+          uri: data.banner
+            ? data.banner.url.replace('localhost', '10.0.2.2')
+            : `https://api.adorable.io/avatar/50/${data.organizer.name}.png`,
+        }}
+      />
       <InfoContainer>
         <Info>
-          <Title>Meetup NodeJS</Title>
-          <MeetupDetails icon="event" text="24 jun as 08h" />
-          <MeetupDetails icon="place" text="Rua Gemballa n80" />
-          <MeetupDetails icon="person" text="Organizador" />
+          <Title>{data.title}</Title>
+          <MeetupDetails icon="event" text={dateParsed} />
+          <MeetupDetails icon="place" text={data.location} />
+          <MeetupDetails
+            icon="person"
+            text={`Organizador: ${data.organizer.name}`}
+          />
         </Info>
-        <Subscription onPress={() => {}}>
-          <SubscriptionText>Realizar Inscrição</SubscriptionText>
-        </Subscription>
+        {!data.past && (
+          <Subscription onPress={onCancel}>
+            <SubscriptionText>Cacnelar Inscrição</SubscriptionText>
+          </Subscription>
+        )}
       </InfoContainer>
     </Container>
   );

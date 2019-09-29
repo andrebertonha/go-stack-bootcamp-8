@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {RectButton} from 'react-native-gesture-handler';
+// import {RectButton} from 'react-native-gesture-handler';
 
 export const Container = styled.View`
   flex: 1;
@@ -7,10 +7,12 @@ export const Container = styled.View`
   background: #fff;
   margin-bottom: 20px;
   overflow: hidden;
+
+  opacity: ${props => (props.past ? 0.9 : 1)};
 `;
 
 export const InfoContainer = styled.View`
-  padding: 15px 20px;
+  padding: 10px 20px;
 `;
 
 export const Info = styled.View`
@@ -18,46 +20,24 @@ export const Info = styled.View`
 `;
 
 export const Title = styled.Text`
-  font-size: 24px;
+  font-size: 18px;
   color: #333;
   font-weight: bold;
 `;
 
 export const Banner = styled.Image`
   align-self: stretch;
-  height: 180px;
+  height: 150px;
 `;
 
-export const Data = styled.Text.attrs({
-  numberOfLines: 1,
-})`
-  flex-direction: row;
-  align-items: center;
-  color: #999;
-  font-size: 16px;
-  font-weight: normal;
-`;
-
-export const Local = styled.Text`
-  font-weight: normal;
-  font-size: 16px;
-  color: #999;
-`;
-
-export const Organizador = styled.Text`
-  font-weight: normal;
-  font-size: 16px;
-  color: #999;
-`;
-
-export const Subscription = styled(RectButton)`
+export const Subscription = styled.TouchableOpacity`
   height: 46px;
   background: #f94d6a;
   border-radius: 4px;
 
   align-items: center;
   justify-content: center;
-  margin-top: 20px;
+  margin: 10px 0;
 `;
 
 export const SubscriptionText = styled.Text`
