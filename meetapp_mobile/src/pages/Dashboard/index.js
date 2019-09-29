@@ -36,9 +36,9 @@ function Dashboard({isFocused}) {
     loadMeetups();
   }, []);
 
-  async function subscribeToMeetup(meetup_id) {
+  async function subscribeToMeetup(meetupId) {
     try {
-      await api.post(`meetups/${meetup_id}/subscriptions`);
+      await api.post(`meetups/${meetupId}/subscriptions`);
       Alert.alert('Inscrição', 'Inscrição efetuada com sucesso!');
     } catch (err) {
       console.tron.log('subscribe error', err);
@@ -66,7 +66,7 @@ function Dashboard({isFocused}) {
             <Meetup
               data={item}
               buttonText="Realizar inscrição"
-              onPress={() => subscribeToMeetup(item.id)}
+              subscribe={() => subscribeToMeetup(item.id)}
             />
           )}
         />

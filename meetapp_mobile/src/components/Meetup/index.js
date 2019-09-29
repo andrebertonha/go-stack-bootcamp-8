@@ -15,7 +15,7 @@ import {
   InfoContainer,
 } from './styles';
 
-export default function Meetup({data, onCancel}) {
+export default function Meetup({data, subscribe}) {
   const dateParsed = format(parseISO(data.date), "dd' de ' MMMM', às 'HH'h'", {
     locale: pt,
   });
@@ -39,11 +39,10 @@ export default function Meetup({data, onCancel}) {
             text={`Organizador: ${data.organizer.name}`}
           />
         </Info>
-        {!data.past && (
-          <Subscription onPress={onCancel}>
-            <SubscriptionText>Cacnelar Inscrição</SubscriptionText>
-          </Subscription>
-        )}
+
+        <Subscription onPress={subscribe}>
+          <SubscriptionText>Inscrever-se</SubscriptionText>
+        </Subscription>
       </InfoContainer>
     </Container>
   );
