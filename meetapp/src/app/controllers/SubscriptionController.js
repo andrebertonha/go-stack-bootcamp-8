@@ -2,6 +2,7 @@ import { Op } from 'sequelize';
 import User from '../models/User';
 import Meetup from '../models/Meetup';
 import Subscription from '../models/Subscription';
+import File from '../models/File';
 
 import Queue from '../../lib/Queue';
 import SubscriptionMail from '../jobs/SubscriptionMail';
@@ -12,29 +13,21 @@ class SubscriptionController {
       where: {
         user_id: req.userId,
       },
-      include: [
-        {
-          model: Meetup,
-          where: {
-            date: {
-              [Op.gt]: new Date(),
-            },
-          },
-          required: true,
-        },
-      ],
       order: [[Meetup, 'date']],
     });
+
+    console.log(subscriptions);
+
     return res.json(subscriptions);
   }
 
   async store(req, res) {
-    const user = await User.findByPk(req.userId);
-    const meetup = await Meetup.findByPk(req.params.meetupId, {
-      include: [User],
-    });
+    const { meetupId: meetup_id } = req.params;
+    const { userId: user_id } = req;
 
-    if (meetup.user_id === req.userId) {
+    const meetup = await Meetup.findByPk(meetup_id);
+
+    if (meetup.user_id === user_id) {
       return res
         .status(400)
         .json({ error: "Can't subscribe to you own meetups" });
@@ -44,38 +37,65 @@ class SubscriptionController {
       return res.status(400).json({ error: "Can't subscribe to past meetups" });
     }
 
+    const checkIfIsSubscribed = await Subscription.findOne({
+      where: { user_id, meetup_id },
+    });
+
+    if (checkIfIsSubscribed) {
+      return res
+        .status(400)
+        .json({ error: 'You are already subscribed to this meetup.' });
+    }
+
+    /*
+      verificar se usuario ja esta cadastrado em outro meetup na mesma data..
+
     const checkDate = await Subscription.findOne({
       where: {
-        user_id: user.id,
+        user_id,
       },
-      include: [
-        {
-          model: Meetup,
-          required: true,
-          where: {
-            date: meetup.date,
-          },
-        },
-      ],
     });
 
     if (checkDate) {
       return res
         .status(400)
         .json({ error: "Can't subscribe to two meetups at the same time" });
-    }
+    } */
 
     const subscription = await Subscription.create({
-      user_id: user.id,
-      meetup_id: meetup.id,
+      user_id,
+      meetup_id,
     });
 
     await Queue.add(SubscriptionMail.key, {
       meetup,
-      user,
     });
 
     return res.json(subscription);
+  }
+
+  async delete(req, res) {
+    const { id: meetup_id } = req.params;
+    const { userId: user_id } = req;
+
+    const meetup = await Meetup.findByPk(meetup_id);
+
+    if (meetup.past) {
+      return res.status(400).json({ error: 'This meetup has been passed' });
+    }
+
+    const subscription = await Subscription.findOne({
+      where: { user_id, meetup_id },
+    });
+
+    if (!subscription) {
+      return res
+        .status(400)
+        .json({ error: 'You are not subcribed in this meetup' });
+    }
+
+    await subscription.destroy();
+    return res.send();
   }
 }
 

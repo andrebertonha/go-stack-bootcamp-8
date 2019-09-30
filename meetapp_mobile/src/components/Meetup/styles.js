@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-// import {RectButton} from 'react-native-gesture-handler';
+import Button from '../Button';
 
 export const Container = styled.View`
   flex: 1;
@@ -30,7 +30,7 @@ export const Banner = styled.Image`
   height: 150px;
 `;
 
-export const Subscription = styled.TouchableOpacity`
+export const Subscription = styled(Button)`
   height: 46px;
   background: #f94d6a;
   border-radius: 4px;

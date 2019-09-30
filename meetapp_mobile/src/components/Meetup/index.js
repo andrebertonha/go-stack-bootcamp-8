@@ -11,11 +11,10 @@ import {
   Banner,
   Title,
   Subscription,
-  SubscriptionText,
   InfoContainer,
 } from './styles';
 
-export default function Meetup({data, subscribe}) {
+export default function Meetup({data, onPress, buttonText}) {
   const dateParsed = format(parseISO(data.date), "dd' de ' MMMM', às 'HH'h'", {
     locale: pt,
   });
@@ -39,10 +38,9 @@ export default function Meetup({data, subscribe}) {
             text={`Organizador: ${data.organizer.name}`}
           />
         </Info>
-
-        <Subscription onPress={subscribe}>
-          <SubscriptionText>Inscrever-se</SubscriptionText>
-        </Subscription>
+        {!data.past && (
+          <Subscription onPress={onPress}>{buttonText}</Subscription>
+        )}
       </InfoContainer>
     </Container>
   );
