@@ -1,21 +1,23 @@
 import {Alert} from 'react-native';
 import {takeLatest, call, put, all} from 'redux-saga/effects';
 
-import api from '../../../services/api';
+import api from '~/services/api';
 
 import {updateProfileSuccess, updateProfileFailure} from './actions';
 
 export function* updateProfile({payload}) {
+  console.log(payload, 'payload');
   try {
-    const {email, oldPassword, password, confirmPassword} = payload.data;
+    const {name, email, ...rest} = payload.data;
 
     // Object.assign
     const profile = {
+      name,
       email,
-      oldPassword,
-      password,
-      confirmPassword,
+      ...(rest.oldPassword ? rest : {}),
     };
+
+    console.log(profile);
 
     const response = yield call(api.put, 'users', profile);
 

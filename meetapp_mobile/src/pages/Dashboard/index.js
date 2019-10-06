@@ -19,12 +19,14 @@ function Dashboard({isFocused}) {
   const [date, setDate] = useState(new Date());
   const [meetups, setMeetups] = useState([]);
 
-  function decreaseDate() {
+  async function decreaseDate() {
     setDate(subDays(date, 1));
+    await api.get('meetups');
   }
 
-  function increaseDate() {
+  async function increaseDate() {
     setDate(addDays(date, 1));
+    await api.get('meetups');
   }
 
   useEffect(() => {

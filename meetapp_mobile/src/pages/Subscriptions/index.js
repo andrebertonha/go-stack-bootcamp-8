@@ -13,16 +13,14 @@ import Header from '~/components/Header';
 
 import {Container, List} from './styles';
 
-function Subscriptions({onPress}) {
+function Subscriptions() {
   const [meetups, setMeetups] = useState([]);
 
-  // rever loadMeetups after unsubscribe to list only meetups that user can unsubscribe
   useEffect(() => {
     async function loadMeetups() {
       const response = await api.get('meetups');
       setMeetups(response.data);
     }
-
     loadMeetups();
   }, []);
 
