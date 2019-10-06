@@ -7,21 +7,22 @@ import File from '../models/File';
 
 class MeetupController {
   async index(req, res) {
-    const where = {};
     const page = req.query.page || 1;
 
-    const {date} = req.query;
-    console.log(date, 'test');
+    const { date } = req.query;
 
-    if (date) {
-      const searchDate = parseISO(req.query.date);
-      where.date = {
-        [Op.between]: [startOfDay(searchDate), endOfDay(searchDate)],
-      };
+    const searchDate = Number(date);
+
+    if (!date) {
+      return res.status(400).json({ error: 'Invalid date' });
     }
 
     const meetups = await Meetup.findAll({
-      where,
+      where: {
+        date: {
+          [Op.between]: [startOfDay(searchDate), endOfDay(searchDate)],
+        },
+      },
       include: [
         {
           model: User,
@@ -37,6 +38,8 @@ class MeetupController {
       limit: 10,
       offset: 10 * page - 10,
     });
+
+    console.log(meetups, 'test bring meetup from date switch');
 
     return res.json(meetups);
   }

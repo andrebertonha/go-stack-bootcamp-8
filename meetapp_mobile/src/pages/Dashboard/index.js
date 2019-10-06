@@ -21,22 +21,23 @@ function Dashboard({isFocused}) {
 
   async function decreaseDate() {
     setDate(subDays(date, 1));
-    await api.get('meetups');
   }
 
   async function increaseDate() {
     setDate(addDays(date, 1));
-    await api.get('meetups');
   }
 
   useEffect(() => {
     async function loadMeetups() {
-      const response = await api.get('meetups');
+      const response = await api.get('meetups', {
+        params: {
+          date: date.getTime(),
+        },
+      });
       setMeetups(response.data);
     }
-
     loadMeetups();
-  }, []);
+  }, [date, isFocused]);
 
   async function subscribeToMeetup(id) {
     try {
