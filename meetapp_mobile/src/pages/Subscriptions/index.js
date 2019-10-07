@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {Alert} from 'react-native';
-
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
 import {withNavigationFocus} from 'react-navigation';
+import {format, parseISO} from 'date-fns';
 
 import api from '~/services/api';
 
@@ -13,15 +12,16 @@ import Header from '~/components/Header';
 
 import {Container, List} from './styles';
 
-function Subscriptions() {
+function Subscriptions({isFocused}) {
+  // const [date, setDate] = useState(new Date());
   const [meetups, setMeetups] = useState([]);
 
   useEffect(() => {
-    async function loadMeetups() {
-      const response = await api.get('meetups');
-      setMeetups(response.data);
+    async function loadSubscriptions() {
+      const {data} = await api.get('subscriptions');
+      setMeetups(data);
     }
-    loadMeetups();
+    loadSubscriptions();
   }, []);
 
   async function cancelSubscription(id) {
@@ -47,9 +47,9 @@ function Subscriptions() {
           keyExtractor={item => String(item.id)}
           renderItem={({item}) => (
             <Meetup
-              data={item}
+              data={item.meetup}
               buttonText="Cancelar Inscrição"
-              onPress={() => cancelSubscription(item.id)}
+              onPress={() => cancelSubscription(item.meetup.id)}
             />
           )}
         />

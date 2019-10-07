@@ -29,7 +29,7 @@ function Dashboard({isFocused}) {
 
   useEffect(() => {
     async function loadMeetups() {
-      const response = await api.get('meetups', {
+      const response = await api.get('daymeetups', {
         params: {
           date: date.getTime(),
         },
@@ -79,7 +79,7 @@ function Dashboard({isFocused}) {
 }
 
 Dashboard.navigationOptions = {
-  tabBarLabel: 'Inscrições',
+  tabBarLabel: 'Meetups',
   tabBarIcon: ({tintColor}) => (
     <Icon name="format-list-bulleted" size={20} color={tintColor} />
   ),

@@ -15,7 +15,7 @@ import {
 } from './styles';
 
 export default function Meetup({data, onPress, buttonText}) {
-  const dateParsed = format(parseISO(data.date), "dd' de ' MMMM', às 'HH'h'", {
+  const dateParsed = format(parseISO(data.date), "dd' de 'MMMM', às 'HH'h'", {
     locale: pt,
   });
 

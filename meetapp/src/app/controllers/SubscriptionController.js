@@ -1,4 +1,5 @@
 import { Op } from 'sequelize';
+import { startofDay } from 'date-fns';
 import User from '../models/User';
 import Meetup from '../models/Meetup';
 import Subscription from '../models/Subscription';
@@ -9,16 +10,32 @@ import SubscriptionMail from '../jobs/SubscriptionMail';
 
 class SubscriptionController {
   async index(req, res) {
-    const subscriptions = await Subscription.findAll({
-      where: {
-        user_id: req.userId,
-      },
-      order: [[Meetup, 'date']],
+    const meetups = await Subscription.findAll({
+      where: { user_id: req.userId },
+      attributes: ['id'],
+      include: [
+        {
+          model: Meetup,
+          as: 'meetup',
+          required: true,
+          attributes: ['id', 'title', 'location', 'date', 'past'],
+          include: [
+            {
+              model: User,
+              as: 'organizer',
+              attributes: ['name', 'email'],
+            },
+            {
+              model: File,
+              as: 'banner',
+              attributes: ['id', 'name', 'path', 'url'],
+            },
+          ],
+        },
+      ],
     });
 
-    console.log(subscriptions);
-
-    return res.json(subscriptions);
+    return res.json(meetups);
   }
 
   async store(req, res) {

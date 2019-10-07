@@ -1,6 +1,5 @@
 import * as Yup from 'yup';
-import { Op } from 'sequelize';
-import { isBefore, startOfDay, endOfDay, parseISO } from 'date-fns';
+import { isBefore, parseISO } from 'date-fns';
 import Meetup from '../models/Meetup';
 import User from '../models/User';
 import File from '../models/File';
@@ -9,20 +8,7 @@ class MeetupController {
   async index(req, res) {
     const page = req.query.page || 1;
 
-    const { date } = req.query;
-
-    const searchDate = Number(date);
-
-    if (!date) {
-      return res.status(400).json({ error: 'Invalid date' });
-    }
-
     const meetups = await Meetup.findAll({
-      where: {
-        date: {
-          [Op.between]: [startOfDay(searchDate), endOfDay(searchDate)],
-        },
-      },
       include: [
         {
           model: User,
@@ -38,8 +24,6 @@ class MeetupController {
       limit: 10,
       offset: 10 * page - 10,
     });
-
-    console.log(meetups, 'test bring meetup from date switch');
 
     return res.json(meetups);
   }
