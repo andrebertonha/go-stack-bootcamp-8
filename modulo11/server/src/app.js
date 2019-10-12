@@ -1,5 +1,4 @@
 import './bootstrap';
-
 import Youch from 'youch';
 import express from 'express';
 import 'express-async-errors';
@@ -34,6 +33,8 @@ class App {
 
         return res.status(500).json(errors);
       }
+
+      console.log('error', err);
 
       return res.status(500).json({ error: 'Internal server error' });
     });
