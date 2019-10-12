@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@rocketseat/omni": "^0.0.7",
     "react-native-cli": "^2.0.1"
   }
 }
