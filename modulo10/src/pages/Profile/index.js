@@ -6,7 +6,15 @@ import Background from '~/components/Background';
 import { signOut } from '~/store/modules/auth/actions';
 import { updateProfileRequest } from '~/store/modules/user/actions';
 
-import { Container, Title, Separator, Form, FormInput, SubmitButton, LogoutButton } from './styles';
+import {
+  Container,
+  Title,
+  Separator,
+  Form,
+  FormInput,
+  SubmitButton,
+  LogoutButton,
+} from './styles';
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -30,9 +38,15 @@ export default function Profile() {
   }, [profile]);
 
   function handleSubmit() {
-    dispatch(updateProfileRequest({
-      name, email, oldPassword, password, confirmPassword
-    }));
+    dispatch(
+      updateProfileRequest({
+        name,
+        email,
+        oldPassword,
+        password,
+        confirmPassword,
+      })
+    );
   }
 
   function handleLogout() {
