@@ -14,6 +14,8 @@ export default function Meetup() {
   const dispatch = useDispatch();
   const meetup = useSelector(state => state.meetup.meetup);
 
+  console.log(meetup, 'teste');
+
   meetup.date = parseISO(meetup.date);
 
   function handleSubmit(data) {
