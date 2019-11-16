@@ -6,8 +6,13 @@ Route.post('users', 'UserController.store')
 Route.post('sessions', 'SessionController.store')
 
 Route.post('passwords', 'ForgotPasswordController.store')
-
 Route.put('passwords', 'ForgotPasswordController.update')
 
 Route.get('/files/:id', 'FileController.show')
-Route.post('/files', 'FileController.store')
+
+// rotas que serao chamadas somente se o usuario estiver logado
+Route.group(() => {
+  Route.post('/files', 'FileController.store')
+  // crud routes -> adonis route:list to see them
+  Route.resource('projects', 'ProjectController').apiOnly()
+}).middleware(['auth'])
