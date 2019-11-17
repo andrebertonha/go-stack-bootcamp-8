@@ -15,4 +15,6 @@ Route.group(() => {
   Route.post('/files', 'FileController.store')
   // crud routes -> adonis route:list to see them
   Route.resource('projects', 'ProjectController').apiOnly()
+  // id do projeto
+  Route.resource('projects.tasks', 'TaskController').apiOnly()
 }).middleware(['auth'])
